@@ -1,10 +1,12 @@
-package rakib.hasan.scheduleit.model
+package rakib.hasan.scheduleit.feature.model
 
 import android.graphics.drawable.Drawable
 import android.graphics.Bitmap
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
+import android.graphics.Canvas
 
 data class AppInfo(
     val name: String,
@@ -23,7 +25,7 @@ data class AppInfo(
                 icon.intrinsicHeight,
                 Bitmap.Config.ARGB_8888
             )
-            val canvas = android.graphics.Canvas(drawableBitmap)
+            val canvas = Canvas(drawableBitmap)
             icon.setBounds(0, 0, canvas.width, canvas.height)
             icon.draw(canvas)
             drawableBitmap
@@ -34,7 +36,7 @@ data class AppInfo(
     companion object {
         fun fromApplicationInfo(
             appInfo: ApplicationInfo,
-            packageManager: android.content.pm.PackageManager
+            packageManager: PackageManager
         ): AppInfo {
             return AppInfo(
                 name = packageManager.getApplicationLabel(appInfo).toString(),

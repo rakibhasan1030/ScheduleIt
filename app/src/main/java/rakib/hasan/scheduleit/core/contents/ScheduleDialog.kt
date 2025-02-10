@@ -1,4 +1,4 @@
-package com.rakib.appscheduler.core.content
+package rakib.hasan.scheduleit.core.contents
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -8,16 +8,15 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.rakib.appscheduler.feature.appscheduler.data.AppInfo
+import rakib.hasan.scheduleit.feature.model.AppInfo
 import java.util.Calendar
-import java.util.Date
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScheduleDialog(
     app: AppInfo,
     onSchedule: (Long) -> Unit,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
 ) {
     var selectedDateTime by remember {
         mutableStateOf(Calendar.getInstance())
