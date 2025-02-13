@@ -12,6 +12,9 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+
+// this is from my side and this is from his side... is this okay?
+// I don't know if it is okay or mjn
 @Composable
 fun AppListItem(
     app: AppInfo,

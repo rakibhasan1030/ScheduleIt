@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ScheduleIt</string>
+    <string name="accessibility_service_description">Used to launch scheduled apps</string>
 </resources>

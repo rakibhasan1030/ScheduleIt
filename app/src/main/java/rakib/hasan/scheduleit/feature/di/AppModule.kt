@@ -1,5 +1,6 @@
 package rakib.hasan.scheduleit.feature.di
 
+import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
 import dagger.Module
@@ -12,6 +13,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
+
+    @Provides
+    @Singleton
+    fun provideApplicationContext(application: Application): Context {
+        return application.applicationContext
+    }
 
     @Provides
     @Singleton
