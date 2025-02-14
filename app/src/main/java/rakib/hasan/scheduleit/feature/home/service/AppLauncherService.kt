@@ -1,11 +1,10 @@
-package rakib.hasan.scheduleit.feature.service
+package rakib.hasan.scheduleit.feature.home.service
 
+import android.R
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.app.Service
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Handler
@@ -34,7 +33,7 @@ class AppLauncherService : Service() {
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("Launching App")
             .setContentText("Preparing to launch $appName...")
-            .setSmallIcon(android.R.drawable.ic_dialog_info)
+            .setSmallIcon(R.drawable.ic_dialog_info)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .build()
 
@@ -73,7 +72,7 @@ class AppLauncherService : Service() {
     }
 
     private fun isAccessibilityServiceEnabled(): Boolean {
-        val accessibilityManager = getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
+        val accessibilityManager = getSystemService(ACCESSIBILITY_SERVICE) as AccessibilityManager
         val enabledServices = accessibilityManager.getEnabledAccessibilityServiceList(AccessibilityServiceInfo.FEEDBACK_ALL_MASK)
         return enabledServices.any { it.id.contains("$packageName/.AppLauncherAccessibilityService") }
     }

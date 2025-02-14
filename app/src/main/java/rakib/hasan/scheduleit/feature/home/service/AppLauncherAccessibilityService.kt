@@ -1,4 +1,4 @@
-package rakib.hasan.scheduleit.feature.service
+package rakib.hasan.scheduleit.feature.home.service
 
 import android.accessibilityservice.AccessibilityService
 import android.content.Intent

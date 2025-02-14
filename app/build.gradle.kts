@@ -68,5 +68,8 @@ dependencies {
     implementation(libs.room.runtime)
     ksp(libs.room.compiler) // for annotation processing
     implementation(libs.room.ktx) // for coroutines and Kotlin support
+    implementation(libs.navigation.compose)
+    implementation(libs.navigation.compose.hilt)
+    implementation(libs.splashscreen)
 
 }

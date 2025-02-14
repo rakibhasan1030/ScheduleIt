@@ -1,4 +1,4 @@
-package rakib.hasan.scheduleit.feature.model
+package rakib.hasan.scheduleit.feature.app_list.model
 
 import android.graphics.drawable.Drawable
 import android.graphics.Bitmap

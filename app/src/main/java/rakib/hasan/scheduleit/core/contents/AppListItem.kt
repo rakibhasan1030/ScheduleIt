@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import rakib.hasan.scheduleit.feature.model.AppInfo
+import rakib.hasan.scheduleit.feature.app_list.model.AppInfo
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

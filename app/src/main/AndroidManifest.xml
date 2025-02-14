@@ -27,7 +27,7 @@
         android:theme="@style/Theme.ScheduleIt"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".feature.main.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.ScheduleIt">
@@ -41,14 +41,14 @@
             android:exported="false"/>
 
         <service
-            android:name=".feature.service.AppLauncherService"
+            android:name=".feature.home.service.AppLauncherService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="shortService">
         </service>
 
         <service
-            android:name=".feature.service.AppLauncherAccessibilityService"
+            android:name=".feature.home.service.AppLauncherAccessibilityService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
             android:exported="false">
             <intent-filter>
