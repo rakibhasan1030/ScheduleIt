@@ -8,13 +8,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import rakib.hasan.scheduleit.feature.app_list.model.AppInfo
+import rakib.hasan.scheduleit.feature.schedule.domain.model.ScheduledApp
 import java.util.Calendar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScheduleDialog(
-    app: AppInfo?,
+    app: ScheduledApp?,
     onSchedule: (Long) -> Unit,
     onDismiss: () -> Unit,
 ) {

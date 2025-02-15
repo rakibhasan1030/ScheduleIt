@@ -4,8 +4,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import rakib.hasan.scheduleit.core.graph.details.appListNavGraph
-import rakib.hasan.scheduleit.core.graph.root.Graph.APP_LIST_GRAPH
+import rakib.hasan.scheduleit.core.graph.details.ScheduleRoutes
+import rakib.hasan.scheduleit.core.graph.details.scheduleNavGraph
+import rakib.hasan.scheduleit.core.graph.root.Graph.SCHEDULE_GRAPH
 import rakib.hasan.scheduleit.core.graph.root.Graph.HOME
 import rakib.hasan.scheduleit.feature.home.view.HomeScreen
 
@@ -22,16 +23,26 @@ fun NavGraphBuilder.homeNavGraph(
         ) {
             HomeScreen(
                 onAddClicked = {
-                    navController.navigate(APP_LIST_GRAPH)
+                    // Navigate WITHOUT arguments
+                    navController.navigate(ScheduleRoutes.Schedule.noArgRoute)
+                },
+                onEditClicked = { scheduledApp ->
+                    // Navigate WITH arguments
+                    navController.navigate(
+                        ScheduleRoutes.Schedule.routeWithArgs.replace(
+                            "{packageName}",
+                            scheduledApp.packageName
+                        )
+                    )
                 },
                 onNavigateBack = {
-
+                    // Handle back navigation if needed
                 }
             )
         }
 
-        appListNavGraph(navController = navController)
-
+        // Include the scheduleNavGraph
+        scheduleNavGraph(navController = navController)
     }
 }
 

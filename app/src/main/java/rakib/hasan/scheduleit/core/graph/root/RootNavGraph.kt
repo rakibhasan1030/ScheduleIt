@@ -29,7 +29,7 @@ object Graph {
     const val HOME = "home_graph"
 
     // nested graphs
-    const val APP_LIST_GRAPH = "app_list_graph"
+    const val SCHEDULE_GRAPH = "app_list_graph"
 }
 
 

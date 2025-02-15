@@ -12,19 +12,15 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -33,23 +29,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import rakib.hasan.scheduleit.feature.app_list.model.AppInfo
+import rakib.hasan.scheduleit.feature.schedule.domain.model.ScheduledApp
 import kotlin.collections.forEachIndexed
 
 @Composable
 fun AppListDialog(
     title: String,
-    items: List<AppInfo>,
-    selectedItem: AppInfo?,
+    items: List<ScheduledApp>,
+    selectedItem: ScheduledApp?,
     onDismiss: () -> Unit,
-    onSelect: (AppInfo) -> Unit,
+    onSelect: (ScheduledApp) -> Unit,
 ) {
-    var selectedItemLocal by remember { mutableStateOf<AppInfo?>(selectedItem) }
+    var selectedItemLocal by remember { mutableStateOf<ScheduledApp?>(selectedItem) }
     var searchQuery by remember { mutableStateOf("") }
 
     val filteredItems = items.filter {
@@ -60,7 +53,9 @@ fun AppListDialog(
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
-            Column {
+            Column(
+
+            ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
