@@ -10,7 +10,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import rakib.hasan.scheduleit.core.database.AppDatabase
+import rakib.hasan.scheduleit.core.utils.AppBroadcastReceiver
 import rakib.hasan.scheduleit.core.utils.PermissionManager
+import rakib.hasan.scheduleit.feature.home.service.AlarmScheduler
+import rakib.hasan.scheduleit.feature.schedule.presentation.viewmodel.ScheduleViewModel
 import javax.inject.Singleton
 
 @Module
@@ -43,6 +46,19 @@ class AppModule {
     @Singleton
     fun providePermissionManager(@ApplicationContext context: Context): PermissionManager {
         return PermissionManager(context)
+    }
+
+/*
+    @Provides
+    fun provideAppBroadcastReceiver(viewModel: ScheduleViewModel, alarmScheduler: AlarmScheduler): AppBroadcastReceiver {
+        return AppBroadcastReceiver(viewModel, alarmScheduler)
+    }
+*/
+
+    @Provides
+    @Singleton
+    fun provideAlarmScheduler(@ApplicationContext context: Context): AlarmScheduler {
+        return AlarmScheduler(context)
     }
 
 }

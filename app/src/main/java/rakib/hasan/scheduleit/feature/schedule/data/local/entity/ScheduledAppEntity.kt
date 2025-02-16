@@ -11,5 +11,7 @@ data class ScheduledAppEntity(
     val packageName: String,
     val scheduledTime: Long,
     val repeatInterval: Int = 0,
+    val repeatValue: Int = 0,
+    val lastExecutionTime: Long? = null,
     val isSystemApp: Boolean = false
 )

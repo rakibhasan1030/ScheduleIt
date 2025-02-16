@@ -1,12 +1,10 @@
 package rakib.hasan.scheduleit.feature.schedule.data.repository_impl
 
-import android.util.Log
 import rakib.hasan.scheduleit.feature.schedule.data.local.dao.ScheduledAppDao
 import rakib.hasan.scheduleit.feature.schedule.data.local.entity.ScheduledAppEntity
 import rakib.hasan.scheduleit.feature.schedule.domain.model.ScheduledApp
 import rakib.hasan.scheduleit.feature.schedule.domain.repository.ScheduledAppRepository
 import javax.inject.Inject
-
 
 
 class ScheduledAppRepositoryImpl @Inject constructor(
@@ -22,15 +20,12 @@ class ScheduledAppRepositoryImpl @Inject constructor(
     }
 
     override suspend fun delete(scheduledApp: ScheduledApp) {
-        Log.d("DELETE_APP", "Deleting app(ScheduledAppRepositoryImpl): ${scheduledApp.name}")
         scheduledAppDao.delete(scheduledApp.toEntity())
     }
 
     override suspend fun deleteByPackageName(packageName: String) {
-        Log.d("ScheduledAppRepository", "Deleting app with package name: $packageName")
         scheduledAppDao.deleteByPackageName(packageName)
     }
-
 
     override suspend fun getById(id: Long): ScheduledApp? {
         return scheduledAppDao.getById(id)?.toDomain()
@@ -44,13 +39,14 @@ class ScheduledAppRepositoryImpl @Inject constructor(
         return scheduledAppDao.getAll().map { it.toDomain() }
     }
 
-
     private fun ScheduledAppEntity.toDomain(): ScheduledApp {
         return ScheduledApp(
             name = name,
             packageName = packageName,
             scheduledTime = scheduledTime,
             repeatInterval = repeatInterval,
+            repeatValue = repeatValue,
+            lastExecutionTime = lastExecutionTime,
             isSystemApp = isSystemApp
         )
     }

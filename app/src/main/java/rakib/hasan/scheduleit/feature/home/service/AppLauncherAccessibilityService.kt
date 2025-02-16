@@ -35,6 +35,8 @@ class AppLauncherAccessibilityService : AccessibilityService() {
         if (intent != null) {
             startActivity(intent)
             Log.d("AppLauncherAccessibilityService", "Launched app: $packageName")
+        } else {
+            Log.e("AppLauncherAccessibilityService", "Launch intent is null for package: $packageName")
         }
     }
 }

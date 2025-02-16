@@ -182,6 +182,12 @@ fun ScheduledAppItem(
     onDeleteClicked: () -> Unit,
 ) {
 
+    val status = if (scheduledApp.lastExecutionTime != null && scheduledApp.lastExecutionTime >= scheduledApp.scheduledTime!!) {
+        "Completed"
+    } else {
+        "Pending"
+    }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -229,6 +235,7 @@ fun ScheduledAppItem(
                     text = "Repeat: ${getRepeatText(scheduledApp.repeatInterval)}",
                     style = MaterialTheme.typography.bodySmall
                 )
+                Text(text = "Status: $status", style = MaterialTheme.typography.bodySmall)
             }
             IconButton(onClick = onEditClicked) {
                 Icon(Icons.Default.Edit, contentDescription = "Edit")

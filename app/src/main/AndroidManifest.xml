@@ -47,6 +47,8 @@
             android:foregroundServiceType="shortService">
         </service>
 
+
+
         <service
             android:name=".feature.home.service.AppLauncherAccessibilityService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"

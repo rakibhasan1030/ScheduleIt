@@ -40,6 +40,7 @@ class HomeViewModel @Inject constructor(
             loadScheduledApps()
         }
     }
+
     fun deleteScheduleByPackageName(packageName: String) {
         viewModelScope.launch {
             Log.d("DELETE_APP", "Deleting app(HomeViewModel): ${packageName}")

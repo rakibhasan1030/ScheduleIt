@@ -1,14 +1,10 @@
 package rakib.hasan.scheduleit.feature.schedule.domain.model
 
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
-import androidx.core.content.res.ResourcesCompat
 import rakib.hasan.scheduleit.feature.schedule.data.local.entity.ScheduledAppEntity
 
 data class ScheduledApp(
@@ -18,6 +14,8 @@ data class ScheduledApp(
     val isScheduled: Boolean = false,
     val scheduledTime: Long? = null,
     val repeatInterval: Int = 0, // 0 = no repeat, 1 = min, 2 = hour, 3 = day, 4 = month
+    val repeatValue: Int = 0, // e.g., 5 for "every 5 minutes"
+    val lastExecutionTime: Long? = null, // Track the last execution time
     val isSystemApp: Boolean = false,
 ) {
 
