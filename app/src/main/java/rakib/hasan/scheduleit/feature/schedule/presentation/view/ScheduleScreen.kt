@@ -1,10 +1,5 @@
 package rakib.hasan.scheduleit.feature.schedule.presentation.view
 
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
-import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -64,7 +59,6 @@ import rakib.hasan.scheduleit.core.contents.AppListDialog
 import rakib.hasan.scheduleit.core.contents.CustomInputBox
 import rakib.hasan.scheduleit.core.contents.ScheduleDialog
 import rakib.hasan.scheduleit.core.contents.ThoughtInputField
-import rakib.hasan.scheduleit.core.utils.AppBroadcastReceiver
 import rakib.hasan.scheduleit.feature.schedule.domain.model.ScheduledApp
 import rakib.hasan.scheduleit.feature.schedule.presentation.viewmodel.ScheduleViewModel
 import java.text.SimpleDateFormat

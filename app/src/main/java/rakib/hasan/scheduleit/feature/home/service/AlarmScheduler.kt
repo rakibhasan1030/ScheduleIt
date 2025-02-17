@@ -25,13 +25,17 @@ class AlarmScheduler(
             putExtra("REPEAT_VALUE", scheduledApp.repeatValue)
         }
 
-        val requestCode =
-            (scheduledApp.packageName + scheduledApp.scheduledTime.toString()).hashCode()
+        val requestCode = (scheduledApp.packageName + scheduledApp.scheduledTime.toString()).hashCode()
+        val pendingIntentFlags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        } else {
+            PendingIntent.FLAG_UPDATE_CURRENT
+        }
         val pendingIntent = PendingIntent.getBroadcast(
             context,
             requestCode,
             intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            pendingIntentFlags
         )
 
         try {

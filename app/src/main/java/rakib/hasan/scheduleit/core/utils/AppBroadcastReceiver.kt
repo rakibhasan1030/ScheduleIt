@@ -14,14 +14,12 @@ import javax.inject.Inject
 
 class AppBroadcastReceiver : BroadcastReceiver() {
 
+    @Inject
+    lateinit var viewModel: ScheduleViewModel
 
     override fun onReceive(context: Context, intent: Intent) {
+
         val alarmScheduler = AlarmScheduler(context)
-
-            // here i need to initialize the viewmodel
-        var viewModel: ScheduleViewModel
-
-
         val appName = intent.getStringExtra("APP_NAME")
         val packageName = intent.getStringExtra("APP_PACKAGE")
         val repeatInterval = intent.getIntExtra("REPEAT_INTERVAL", 0)
@@ -58,7 +56,7 @@ class AppBroadcastReceiver : BroadcastReceiver() {
                 repeatInterval = repeatInterval,
                 repeatValue = repeatValue
             )
-            alarmScheduler.scheduleAlarm(scheduledApp) // Reschedule the alarm
+            alarmScheduler.scheduleAlarm(scheduledApp)
         }
     }
 

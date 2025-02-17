@@ -45,9 +45,9 @@ fun ThoughtInputField(
         singleLine = false, // Allow multiple lines
         maxLines = 4, // Maximum lines before scrolling
         shape = RoundedCornerShape(12.dp), // Rounded corners
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = MaterialTheme.colorScheme.primary, // Border color when focused
-            unfocusedBorderColor = MaterialTheme.colorScheme.outline, // Border color when unfocused
+        colors = TextFieldDefaults.colors(
+            focusedIndicatorColor = MaterialTheme.colorScheme.primary, // Border color when focused
+            unfocusedIndicatorColor = MaterialTheme.colorScheme.outline, // Border color when unfocused
             cursorColor = MaterialTheme.colorScheme.primary, // Cursor color
             focusedLabelColor = MaterialTheme.colorScheme.primary, // Label color when focused
             unfocusedLabelColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f) // Label color when unfocused
