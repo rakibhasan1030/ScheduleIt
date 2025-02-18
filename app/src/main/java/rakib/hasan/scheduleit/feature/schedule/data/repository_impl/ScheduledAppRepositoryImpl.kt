@@ -1,5 +1,6 @@
 package rakib.hasan.scheduleit.feature.schedule.data.repository_impl
 
+import android.util.Log
 import rakib.hasan.scheduleit.feature.schedule.data.local.dao.ScheduledAppDao
 import rakib.hasan.scheduleit.feature.schedule.data.local.entity.ScheduledAppEntity
 import rakib.hasan.scheduleit.feature.schedule.domain.model.ScheduledApp
@@ -12,6 +13,8 @@ class ScheduledAppRepositoryImpl @Inject constructor(
 ) : ScheduledAppRepository {
 
     override suspend fun insert(scheduledApp: ScheduledApp): Long {
+        Log.v("ScheduledAppRepositoryImpl", "ScheduledApp Info: $scheduledApp")
+
         return scheduledAppDao.insert(scheduledApp.toEntity())
     }
 

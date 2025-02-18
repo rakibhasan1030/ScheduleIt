@@ -46,6 +46,7 @@ data class ScheduledApp(
             packageName = packageName,
             scheduledTime = scheduledTime ?: System.currentTimeMillis(),
             repeatInterval = repeatInterval,
+            repeatValue = repeatValue,
             isSystemApp = isSystemApp
         )
     }

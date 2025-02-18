@@ -349,7 +349,8 @@ fun ScheduleScreen(
                             }
                             val scheduledApp = app.copy(
                                 scheduledTime = selectedTimeAndDate.longValue,
-                                repeatInterval = if (isRepeatEnabled) repeatIntervalValue else 0
+                                repeatInterval = if (isRepeatEnabled) repeatIntervalValue else 0,
+                                repeatValue = if (isRepeatEnabled) repeatValue.toInt() else 0,
                             )
                             if (packageName.isEmpty()) {
                                 viewModel.saveSchedule(scheduledApp)
@@ -385,7 +386,6 @@ fun RepeatIntervalDropdown(
 ) {
     var expanded by remember { mutableStateOf(false) }
     val intervals = listOf("Minutes", "Hours", "Days", "Months", "Years")
-
     Box(
         modifier = Modifier
             .wrapContentSize(Alignment.TopStart)

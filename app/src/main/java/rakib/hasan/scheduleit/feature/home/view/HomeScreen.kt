@@ -32,6 +32,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -61,6 +62,12 @@ fun HomeScreen(
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val scheduledApps = viewModel.scheduledApps.collectAsState()
+
+    LaunchedEffect(scheduledApps.value) {
+        scheduledApps.value.forEach { app ->
+            Log.v("Home", app.toString())
+        }
+    }
 
     // Re-check permissions when the screen is composed or resumed
     DisposableEffect(lifecycleOwner) {
@@ -232,7 +239,7 @@ fun ScheduledAppItem(
                     style = MaterialTheme.typography.bodySmall
                 )
                 Text(
-                    text = "Repeat: ${getRepeatText(scheduledApp.repeatInterval)}",
+                    text = "Repeat: ${getRepeatText(scheduledApp.repeatInterval, scheduledApp.repeatValue)}",
                     style = MaterialTheme.typography.bodySmall
                 )
                 Text(text = "Status: $status", style = MaterialTheme.typography.bodySmall)
@@ -248,12 +255,12 @@ fun ScheduledAppItem(
 }
 
 // Helper function to get repeat interval text
-fun getRepeatText(repeatInterval: Int): String {
+fun getRepeatText(repeatInterval: Int, repeatValue: Int): String {
     return when (repeatInterval) {
-        1 -> "Every Minute"
-        2 -> "Every Hour"
-        3 -> "Every Day"
-        4 -> "Every Month"
+        1 -> "Every $repeatValue Minute"
+        2 -> "Every $repeatValue Hour"
+        3 -> "Every $repeatValue Day"
+        4 -> "Every $repeatValue Month"
         else -> "No Repeat"
     }
 }

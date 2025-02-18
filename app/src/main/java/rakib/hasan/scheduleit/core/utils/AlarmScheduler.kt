@@ -1,4 +1,4 @@
-package rakib.hasan.scheduleit.feature.home.service
+package rakib.hasan.scheduleit.core.utils
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -6,26 +6,24 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.Log
-import rakib.hasan.scheduleit.core.utils.AppBroadcastReceiver
 import rakib.hasan.scheduleit.feature.schedule.domain.model.ScheduledApp
 
 class AlarmScheduler(
     private val context: Context
 ) {
 
-    fun scheduleAlarm(
-        scheduledApp: ScheduledApp
-    ) {
+    fun scheduleAlarm(scheduledApp: ScheduledApp) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-        val intent = Intent(context, AppBroadcastReceiver::class.java).apply {
+        val intent = Intent(context, AppLauncherReceiver::class.java).apply {
             putExtra("APP_NAME", scheduledApp.name)
             putExtra("APP_PACKAGE", scheduledApp.packageName)
             putExtra("REPEAT_INTERVAL", scheduledApp.repeatInterval)
             putExtra("REPEAT_VALUE", scheduledApp.repeatValue)
         }
 
-        val requestCode = (scheduledApp.packageName + scheduledApp.scheduledTime.toString()).hashCode()
+        val requestCode =
+            (scheduledApp.packageName + scheduledApp.scheduledTime.toString()).hashCode()
         val pendingIntentFlags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         } else {
