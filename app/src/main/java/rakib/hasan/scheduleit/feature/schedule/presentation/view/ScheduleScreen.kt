@@ -22,6 +22,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.rounded.DateRange
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -49,16 +50,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.graphics.drawable.toBitmap
 import androidx.hilt.navigation.compose.hiltViewModel
 import rakib.hasan.scheduleit.core.contents.AppListDialog
 import rakib.hasan.scheduleit.core.contents.CustomInputBox
 import rakib.hasan.scheduleit.core.contents.ScheduleDialog
 import rakib.hasan.scheduleit.core.contents.ThoughtInputField
+import rakib.hasan.scheduleit.feature.home.view.loadAppIcon
 import rakib.hasan.scheduleit.feature.schedule.domain.model.ScheduledApp
 import rakib.hasan.scheduleit.feature.schedule.presentation.viewmodel.ScheduleViewModel
 import java.text.SimpleDateFormat
@@ -113,7 +117,7 @@ fun ScheduleScreen(
                 selectedApp = it
                 selectedTimeAndDate.longValue = it.scheduledTime ?: System.currentTimeMillis()
                 isRepeatEnabled = it.repeatInterval > 0
-                repeatValue = if (it.repeatInterval > 0) it.repeatInterval.toString() else ""
+                repeatValue = if (it.repeatInterval > 0) it.repeatValue.toString() else ""
                 repeatInterval = when (it.repeatInterval) {
                     1 -> "Minutes"
                     2 -> "Hours"
@@ -206,13 +210,24 @@ fun ScheduleScreen(
                                 .fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Image(
-                                bitmap = app.getIconAsBitmap(),
-                                contentDescription = app.name,
-                                modifier = Modifier
-                                    .size(50.dp)
-                                    .padding(end = 8.dp)
-                            )
+                            val iconBitmap = loadAppIcon(packageName, context)
+                            if (iconBitmap != null) {
+                                Image(
+                                    bitmap = iconBitmap.toBitmap().asImageBitmap(),
+                                    contentDescription = packageName,
+                                    modifier = Modifier
+                                        .size(48.dp)
+                                        .padding(end = 12.dp)
+                                )
+                            } else {
+                                Icon(
+                                    imageVector = Icons.Default.Face,
+                                    contentDescription = "App Icon",
+                                    modifier = Modifier
+                                        .size(50.dp)
+                                        .padding(end = 8.dp)
+                                )
+                            }
                             Column(modifier = Modifier.weight(1f)) {
                                 Text(
                                     text = app.name,

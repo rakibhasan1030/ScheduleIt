@@ -66,7 +66,7 @@ class ScheduleViewModel @Inject constructor(
     fun updateSchedule(scheduledApp: ScheduledApp) {
         viewModelScope.launch(Dispatchers.IO) {
             updateScheduledApp(scheduledApp)
-            alarmScheduler.scheduleAlarm(scheduledApp) // Schedule the alarm
+            alarmScheduler.scheduleAlarm(scheduledApp)
         }
     }
 
