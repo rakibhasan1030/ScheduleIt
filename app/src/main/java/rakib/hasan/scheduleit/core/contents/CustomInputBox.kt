@@ -20,9 +20,12 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import rakib.hasan.scheduleit.R
 
 @Composable
 fun CustomInputBox(
@@ -47,7 +50,11 @@ fun CustomInputBox(
         BasicTextField(
             value = value,
             onValueChange = { onValueChange(it) },
-            textStyle = TextStyle(fontSize = 16.sp, color = Color.Black),
+            textStyle = TextStyle(
+                fontSize = 16.sp,
+                color = Color.Black,
+                fontFamily = FontFamily(Font(R.font.cabin_regular)),
+            ),
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
             singleLine = true,
             modifier = Modifier
@@ -58,6 +65,7 @@ fun CustomInputBox(
                     if (!isNotEmpty) { // Show label only when empty
                         Text(
                             text = label,
+                            fontFamily = FontFamily(Font(R.font.cabin_regular)),
                             color = Color.Gray,
                         )
                     }

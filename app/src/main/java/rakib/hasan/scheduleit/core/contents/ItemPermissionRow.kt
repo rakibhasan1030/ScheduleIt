@@ -20,9 +20,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import rakib.hasan.scheduleit.R
+import rakib.hasan.scheduleit.ui.theme.Black
 import rakib.hasan.scheduleit.ui.theme.PrimaryBlueDark
 import rakib.hasan.scheduleit.ui.theme.SuccessGreen
 
@@ -49,6 +53,7 @@ fun ItemPermissionRow(
             Text(
                 text = permissionName,
                 fontSize = 18.sp,
+                fontFamily = FontFamily(Font(R.font.cabin_bold)),
                 modifier = modifier
                     .weight(1f)
                     .clip(RoundedCornerShape(16.dp))
@@ -65,7 +70,7 @@ fun ItemPermissionRow(
             ) {
                 Icon(
                     imageVector = icon,
-                    tint = if (icon == Icons.Default.CheckCircle) SuccessGreen else PrimaryBlueDark,
+                    tint = if (icon == Icons.Default.CheckCircle) SuccessGreen else Black,
                     contentDescription = "Check",
                     modifier = modifier
                         .padding(8.dp)
@@ -76,6 +81,7 @@ fun ItemPermissionRow(
         if (isDescriptionVisible) {
             Text(
                 text = permissionDescription,
+                fontFamily = FontFamily(Font(R.font.cabin_regular)),
                 fontSize = 14.sp,
                 modifier = modifier
                     .fillMaxWidth()

@@ -29,6 +29,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import rakib.hasan.scheduleit.R
 import rakib.hasan.scheduleit.core.contents.ItemPermissionRow
 import rakib.hasan.scheduleit.feature.permission.viewmodel.PermissionViewModel
 
@@ -124,7 +127,8 @@ fun PermissionScreen(
             ) {
                 Text(
                     text = "Permission Needed",
-                    fontSize = 32.sp,
+                    fontSize = 36.sp,
+                    fontFamily = FontFamily(Font(R.font.cabin_bold)),
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -209,7 +213,7 @@ fun PermissionScreen(
                         // Navigate back or proceed to the next screen
                         onAllPermissionGranted()
                     },
-                    enabled = overlayPermissionGranted.value && batteryOptimizationDisabled.value && exactAlarmPermissionGranted.value,
+                    enabled = viewModel.areAllPermissionsGranted(),
                     modifier = Modifier
                         .fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
@@ -220,13 +224,14 @@ fun PermissionScreen(
                 ) {
                     Text(
                         text = "Proceed",
-                        fontSize = 16.sp,
-                        color = if (overlayPermissionGranted.value && batteryOptimizationDisabled.value && exactAlarmPermissionGranted.value)
+                        fontFamily = FontFamily(Font(R.font.cabin_bold)),
+                        fontSize = 20.sp,
+                        color = if (viewModel.areAllPermissionsGranted())
                             MaterialTheme.colorScheme.background else MaterialTheme.colorScheme.background.copy(
                             alpha = 0.7f
                         ),
                         modifier = Modifier
-                            .padding(vertical = 4.dp)
+                            .padding(vertical = 6.dp)
                     )
                 }
             }

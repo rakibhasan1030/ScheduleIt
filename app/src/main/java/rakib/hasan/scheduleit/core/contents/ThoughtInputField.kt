@@ -11,8 +11,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import rakib.hasan.scheduleit.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -29,17 +32,20 @@ fun ThoughtInputField(
         label = {
             Text(
                 text = "Enter your thoughts",
+                fontFamily = FontFamily(Font(R.font.cabin_regular)),
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f) // Label color
             )
         },
         placeholder = {
             Text(
                 text = "E.g., This schedule is important for my meeting.",
+                fontFamily = FontFamily(Font(R.font.cabin_regular)),
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f) // Placeholder color
             )
         },
         textStyle = LocalTextStyle.current.copy(
-            color = MaterialTheme.colorScheme.onSurface, // Text color
+            color = MaterialTheme.colorScheme.onSurface,
+            fontFamily = FontFamily(Font(R.font.cabin_regular)),
             fontSize = 16.sp
         ),
         singleLine = false, // Allow multiple lines

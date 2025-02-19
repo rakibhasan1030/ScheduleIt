@@ -25,7 +25,6 @@ class ScheduledAppRepositoryImpl @Inject constructor(
         if (app != null) {
             scheduledAppDao.update(scheduledApp.toEntity().copy(id = app.id))
         } else Log.v("ScheduledAppRepositoryImpl", "Could not find the application")
-
     }
 
     override suspend fun delete(scheduledApp: ScheduledApp) {

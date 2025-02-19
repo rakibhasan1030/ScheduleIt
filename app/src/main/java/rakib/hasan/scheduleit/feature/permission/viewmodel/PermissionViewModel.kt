@@ -56,4 +56,6 @@ class PermissionViewModel @Inject constructor(
         permissionManager.requestExactAlarmPermission()
     }
 
+    fun areAllPermissionsGranted(): Boolean = overlayPermissionGranted.value && batteryOptimizationDisabled.value && exactAlarmPermissionGranted.value
+
 }

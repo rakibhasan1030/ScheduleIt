@@ -54,15 +54,18 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.drawable.toBitmap
 import androidx.hilt.navigation.compose.hiltViewModel
+import rakib.hasan.scheduleit.R
 import rakib.hasan.scheduleit.core.contents.AppListDialog
 import rakib.hasan.scheduleit.core.contents.CustomInputBox
 import rakib.hasan.scheduleit.core.contents.ScheduleDialog
 import rakib.hasan.scheduleit.core.contents.ThoughtInputField
-import rakib.hasan.scheduleit.feature.home.view.loadAppIcon
+import rakib.hasan.scheduleit.core.utils.Const.loadAppIcon
 import rakib.hasan.scheduleit.feature.schedule.domain.model.ScheduledApp
 import rakib.hasan.scheduleit.feature.schedule.presentation.viewmodel.ScheduleViewModel
 import java.text.SimpleDateFormat
@@ -71,7 +74,7 @@ import java.util.Locale
 
 
 fun formatTime(millis: Long?): String {
-    val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm a", Locale.getDefault())
+    val sdf = SimpleDateFormat("dd MMMM yyyy 'at' hh:mm a", Locale.getDefault())
     return if (millis != null) sdf.format(Date(millis)) else ""
 }
 
@@ -165,7 +168,12 @@ fun ScheduleScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Schedule Your App") },
+                title = {
+                    Text(
+                        text = "Schedule Your App",
+                        fontFamily = FontFamily(Font(R.font.cabin_bold)),
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
                         Icon(
@@ -192,8 +200,11 @@ fun ScheduleScreen(
                     .padding(paddingValues)
                     .padding(24.dp)
             ) {
-                // Applications Section
-                Text(text = "Applications")
+                Text(
+                    text = "Applications",
+                    fontFamily = FontFamily(Font(R.font.cabin_bold)),
+                    style = MaterialTheme.typography.bodyLarge
+                )
                 Spacer(Modifier.height(8.dp))
                 Card(
                     modifier = Modifier
@@ -210,7 +221,8 @@ fun ScheduleScreen(
                                 .fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            val iconBitmap = loadAppIcon(packageName, context)
+                            val iconBitmap = loadAppIcon(packageName.takeIf { it.isNotEmpty() }
+                                ?: app.packageName, context)
                             if (iconBitmap != null) {
                                 Image(
                                     bitmap = iconBitmap.toBitmap().asImageBitmap(),
@@ -231,10 +243,12 @@ fun ScheduleScreen(
                             Column(modifier = Modifier.weight(1f)) {
                                 Text(
                                     text = app.name,
+                                    fontFamily = FontFamily(Font(R.font.cabin_bold)),
                                     style = MaterialTheme.typography.bodyLarge
                                 )
                                 Text(
                                     text = app.packageName,
+                                    fontFamily = FontFamily(Font(R.font.cabin_italic)),
                                     style = MaterialTheme.typography.bodySmall
                                 )
                             }
@@ -248,7 +262,11 @@ fun ScheduleScreen(
                 Spacer(Modifier.height(16.dp))
 
                 // Time and Date Section
-                Text(text = "Time and Date")
+                Text(
+                    text = "Time and Date",
+                    fontFamily = FontFamily(Font(R.font.cabin_bold)),
+                    style = MaterialTheme.typography.bodyLarge
+                )
                 Spacer(Modifier.height(8.dp))
                 Card(
                     modifier = Modifier
@@ -272,6 +290,7 @@ fun ScheduleScreen(
                     ) {
                         Text(
                             text = formatTime(selectedTimeAndDate.longValue),
+                            fontFamily = FontFamily(Font(R.font.cabin_regular)),
                             modifier = Modifier
                                 .weight(1f)
                                 .padding(horizontal = 16.dp)
@@ -292,7 +311,6 @@ fun ScheduleScreen(
 
                 Spacer(Modifier.height(16.dp))
 
-                // Repeat Section
                 Row(
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -300,7 +318,9 @@ fun ScheduleScreen(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = "Want to Repeat?"
+                        text = "Want to Repeat?",
+                        fontFamily = FontFamily(Font(R.font.cabin_bold)),
+                        style = MaterialTheme.typography.bodyLarge
                     )
                     Checkbox(
                         checked = isRepeatEnabled,
@@ -349,8 +369,8 @@ fun ScheduleScreen(
 
                 Spacer(Modifier.height(16.dp))
 
-                // Save/Update Button
                 Spacer(Modifier.weight(1f))
+
                 Button(
                     onClick = {
                         selectedApp?.let { app ->
@@ -385,8 +405,9 @@ fun ScheduleScreen(
                 ) {
                     Text(
                         text = if (packageName.isEmpty()) "Save Schedule" else "Update Schedule",
-                        fontSize = 16.sp,
-                        modifier = Modifier.padding(vertical = 4.dp)
+                        fontFamily = FontFamily(Font(R.font.cabin_bold)),
+                        fontSize = 20.sp,
+                        modifier = Modifier.padding(vertical = 6.dp)
                     )
                 }
             }
@@ -409,7 +430,10 @@ fun RepeatIntervalDropdown(
             onClick = { expanded = true },
             modifier = Modifier.width(120.dp)
         ) {
-            Text(text = selectedInterval)
+            Text(
+                text = selectedInterval,
+                fontFamily = FontFamily(Font(R.font.cabin_regular)),
+            )
             Icon(
                 imageVector = Icons.Default.ArrowDropDown,
                 contentDescription = "Dropdown"
@@ -421,7 +445,12 @@ fun RepeatIntervalDropdown(
         ) {
             intervals.forEach { interval ->
                 DropdownMenuItem(
-                    text = { Text(interval) },
+                    text = {
+                        Text(
+                            text = interval,
+                            fontFamily = FontFamily(Font(R.font.cabin_regular)),
+                        )
+                    },
                     onClick = {
                         onIntervalSelected(interval)
                         expanded = false
